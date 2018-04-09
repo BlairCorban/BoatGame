@@ -15,6 +15,8 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
         if(speed > maxspeed)
         {
             speed = maxspeed;    
@@ -25,7 +27,7 @@ public class playerController : MonoBehaviour {
             speed = 0;
         }
         
-		if(Input.GetKey(KeyCode.UpArrow))
+		if(Input.GetAxis("R2") > 0)
         {
             speed += accel;
         }        
@@ -37,14 +39,12 @@ public class playerController : MonoBehaviour {
             }
             
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(Vector3.down * rotationspeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(Vector3.up * rotationspeed * Time.deltaTime);
-        }
+        
+       
+
+        transform.Rotate(Vector3.down * -rotationspeed * Input.GetAxis("LeftX") * Time.deltaTime);
+        
+        
         transform.Translate(0,0,speed * Time.deltaTime);
 	}
 }
