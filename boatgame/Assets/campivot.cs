@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class campivot : MonoBehaviour {
     public Transform boat;
+    public Transform cannon;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,5 +14,6 @@ public class campivot : MonoBehaviour {
 	void Update () {
         transform.position = boat.position;
         transform.Rotate(Vector3.up * 50 * Input.GetAxis("RightX") * Time.deltaTime);
+        cannon.Rotate(Vector3.up * 50 * Input.GetAxis("RightX") * Time.deltaTime);
 	}
 }

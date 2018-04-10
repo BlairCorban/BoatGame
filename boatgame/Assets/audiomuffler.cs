@@ -21,7 +21,8 @@ public class audiomuffler : MonoBehaviour {
         {
             if(!isExplosion)
             {
-                Instantiate(flame, transform.position, flame.transform.rotation);
+                GameObject flameobj = Instantiate(flame, transform.position, flame.transform.rotation);
+                flameobj.transform.parent = gameObject.transform;
                 isExplosion = true;
                 explosion.Play();
                 Invoke("StartMuffle", 1);
@@ -31,12 +32,12 @@ public class audiomuffler : MonoBehaviour {
 
         if(ringing.isPlaying)
         {
-            ringing.volume -= 0.2f * Time.deltaTime;
+            ringing.volume -= 0.1f * Time.deltaTime;
         }
         if(ringing.volume <= 0)
         {
             ringing.Stop();
-            ringing.volume = 1;
+            ringing.volume = 0.75f;
         }
     }
     void StartMuffle()
@@ -45,7 +46,7 @@ public class audiomuffler : MonoBehaviour {
         Invoke("endmuffle", 3);
         if (!ringing.isPlaying)
         {
-            ringing.volume = 1;
+            ringing.volume = 0.75f;
             ringing.Play();
         }
     }
@@ -53,7 +54,7 @@ public class audiomuffler : MonoBehaviour {
 
     void endmuffle()
     {
-        notmuffled.TransitionTo(10);
+        notmuffled.TransitionTo(15);
     }
     
 }
