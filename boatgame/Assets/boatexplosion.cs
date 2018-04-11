@@ -22,9 +22,16 @@ public class boatexplosion : MonoBehaviour {
             sack3.AddExplosionForce(900, sack1.transform.position, 1);
             GameObject flame = Instantiate(flameprefab,transform.position, flameprefab.transform.rotation);
             flame.transform.parent = gameObject.transform;
-            flame.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            flame.transform.localScale = new Vector3(3f, 3f, 3f);
+            Invoke("Destroyitems", 5);
             isExplode = false;
         }
 	}
+    void Destroyitems()
+    {
+        Destroy(sack1.gameObject);
+        Destroy(sack2.gameObject);
+        Destroy(sack3.gameObject);
+    }
     
 }
