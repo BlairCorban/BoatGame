@@ -4,4 +4,28 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/NikStuff/Sence/Menu.unity
+    guid: f6c690a491145ba4184408d548003076
+  - enabled: 1
+    path: Assets/NikStuff/Sence/Sence1.unity
+    guid: b0846b8d599e0e14bb25ae787ff317e6
+  - enabled: 1
+    path: Assets/NikStuff/Sence/Sence2.unity
+    guid: 94c9a94a24b91e14a9811b0db904fb97
+  - enabled: 1
+    path: Assets/NikStuff/Sence/Sence3.unity
+    guid: ad75e150f845d59459a4f643f2c6f432
+  - enabled: 1
+    path: Assets/main.unity
+    guid: de6922669e21172488c9bb75f17919af
+  - enabled: 1
+    path: Assets/NikStuff/Sence/BWin.unity
+    guid: 260c3d8308559274298e170a601d6ca6
+  - enabled: 1
+    path: Assets/NikStuff/Sence/AWin.unity
+    guid: fdffaade48674d841a553e31f90800cb
+  - enabled: 1
+    path: Assets/NikStuff/Sence/Controls.unity
+    guid: 364acb26d47002747b3fd28746375bd8
