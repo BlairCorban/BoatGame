@@ -12,6 +12,7 @@ public class audiomuffler : MonoBehaviour {
     public static bool isExplosion;
 	// Use this for initialization
 	void Start () {
+        notmuffled.TransitionTo(0.1f);
         isExplosion = false;
 	}
 	
