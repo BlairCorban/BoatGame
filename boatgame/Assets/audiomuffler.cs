@@ -9,7 +9,7 @@ public class audiomuffler : MonoBehaviour {
     public AudioSource ringing;
     public AudioSource explosion;
     public GameObject flame;
-    public static bool isExplosion;
+    private bool isExplosion;
 	// Use this for initialization
 	void Start () {
         notmuffled.TransitionTo(0.1f);
@@ -49,7 +49,13 @@ public class audiomuffler : MonoBehaviour {
             ringing.Play();
         }
     }
-    
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "cannonball")
+        {
+            isExplosion = true;
+        }
+    }
 
     void endmuffle()
     {

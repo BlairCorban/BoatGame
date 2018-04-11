@@ -5,6 +5,7 @@ using UnityEngine;
 public class cannoncontroller : MonoBehaviour {
     public GameObject ball;
     public bool canShoot;
+    public AudioSource cannonshot;
 	// Use this for initialization
 	void Start () {
         canShoot = true;
@@ -16,6 +17,7 @@ public class cannoncontroller : MonoBehaviour {
         {
             if(canShoot)
             {
+                cannonshot.Play();
                 Instantiate(ball, transform.position, transform.rotation);
                 canShoot = false;
                 Invoke("shootTimer", 3);

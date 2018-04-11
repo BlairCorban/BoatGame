@@ -7,7 +7,7 @@ public class boatexplosion : MonoBehaviour {
     public Rigidbody sack2;
     public Rigidbody sack3;
     public GameObject flameprefab;
-    public static bool isExplode;
+    private bool isExplode;
 	// Use this for initialization
 	void Start () {
         isExplode = false;
@@ -33,5 +33,13 @@ public class boatexplosion : MonoBehaviour {
         Destroy(sack2.gameObject);
         Destroy(sack3.gameObject);
     }
-    
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "cannonball")
+        {
+            isExplode = true;
+
+
+        }
+    }
 }
