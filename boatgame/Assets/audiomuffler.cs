@@ -9,7 +9,7 @@ public class audiomuffler : MonoBehaviour {
     public AudioSource ringing;
     public AudioSource explosion;
     public GameObject flame;
-    public bool isExplosion;
+    public static bool isExplosion;
 	// Use this for initialization
 	void Start () {
         isExplosion = false;
@@ -17,18 +17,16 @@ public class audiomuffler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.O))
+        if(isExplosion)
         {
-            if(!isExplosion)
-            {
-                GameObject flameobj = Instantiate(flame, transform.position, flame.transform.rotation);
-                flameobj.transform.parent = gameObject.transform;
-                isExplosion = true;
-                explosion.Play();
-                Invoke("StartMuffle", 1);
-            }
-            
+            GameObject flameobj = Instantiate(flame, transform.position, flame.transform.rotation);
+            flameobj.transform.parent = gameObject.transform;
+            isExplosion = false;
+            explosion.Play();
+            Invoke("StartMuffle", 1);
         }
+            
+        
 
         if(ringing.isPlaying)
         {
