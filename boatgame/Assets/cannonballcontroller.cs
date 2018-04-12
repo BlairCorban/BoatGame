@@ -10,7 +10,8 @@ public class cannonballcontroller : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
     }
     void OnCollisionEnter(Collision other)

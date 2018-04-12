@@ -7,13 +7,15 @@ public class cannoncontroller : MonoBehaviour {
     public bool canShoot;
     public AudioSource cannonshot;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         canShoot = true;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(Input.GetButtonDown("AButton"))
+	void Update ()
+    {
+	/*	if(Input.GetButtonDown("AButton"))
         {
             if(canShoot)
             {
@@ -23,7 +25,7 @@ public class cannoncontroller : MonoBehaviour {
                 Invoke("shootTimer", 3);
             }
             
-        }
+        }*/
 	}
     void shootTimer()
     {
