@@ -22,6 +22,8 @@ public class playerController : MonoBehaviour
     public GameObject[] g_goCannon;
     public Transform[] g_tPivotPoint;
     public Camera[] g_cActiveCameras;
+    public GameObject[] g_goCannonBall;
+    public AudioSource g_asCannonshot;
 
     private Vector3 g_vec3MovementVector;
     private Vector3 g_vec3DirectionalVector;
@@ -31,6 +33,8 @@ public class playerController : MonoBehaviour
     public float g_fAccel;
     public float g_fRotationspeed;
     public int g_iPlayerNo;
+
+    public bool g_bCanShoot;
 
     public int g_iJoystickNumber;
 
@@ -48,23 +52,17 @@ public class playerController : MonoBehaviour
         if (Input.GetJoystickNames().Length > 0)
         {
             print("Controller Connected");
-            print(g_sarrControllerID[g_iPlayerNo]);
             g_iJoystickNumber = g_iPlayerNo;
         }
+
+        g_bCanShoot = true;
     }
 
-
-    void fireCannon()
+    void shootTimer()
     {
-
+        g_bCanShoot = true;
     }
 
-   /* void PushPlayerMovement(Vector3 _newPos)
-    {
-        //characterController[g_iJoystickNumber].Move(_newPos * Time.deltaTime);
-        g_goBoat[g_iJoystickNumber].transform.Translate(_newPos * Time.deltaTime);
-        return;
-    }*/
 
 
     // Update is called once per frame
@@ -73,35 +71,42 @@ public class playerController : MonoBehaviour
         if (g_iJoystickNumber != 420)
         {
             switch (g_iJoystickNumber)
-              {
-                  case 0: // player 1
+            {
+               case 0: // player 1
                       {
-                        if (Input.GetAxis("LeftY") < 0.1 && Input.GetAxis("LeftY") != 0)  // ONLY POSITIVE MOVEMENT THUS THE BOAT CANNOT BE MANIPULATED BACKWARDS
+                        if (Input.GetAxis("LeftY") < 0.1f && Input.GetAxis("LeftY") != 0.0f)  // ONLY POSITIVE MOVEMENT THUS THE BOAT CANNOT BE MANIPULATED BACKWARDS
                         {
                             transform.Translate(Vector3.back * 15 * Input.GetAxis("LeftY") * Time.deltaTime);
-                            print("moving ship");
                         }
 
-                        if (Input.GetAxis("L2") > 0)
+                        if (Input.GetAxis("L2") != 0.0f)
                         {
-                            //moveShip(g_iJoystickNumber);
-                            print("firing cannon");
-                            fireCannon();
+                            //fireCannon();
                         }
 
-                        if (Input.GetAxis("RightX") > 0.1 || Input.GetAxis("RightX") < -0.1) // CAMERA PIVOT
+                        if (Input.GetAxis("RightX") > 0.1f || Input.GetAxis("RightX") < -0.1f) // CAMERA PIVOT
                         {
                             g_tPivotPoint[g_iJoystickNumber].position = g_goBoat[g_iJoystickNumber].transform.position;
                             g_tPivotPoint[g_iJoystickNumber].transform.Rotate(Vector3.up * 50 * Input.GetAxis("RightX") * Time.deltaTime);
-                            print("cam pivot point altered");
+
                             g_goCannon[g_iJoystickNumber].transform.Rotate(Vector3.up * 50 * Input.GetAxis("RightX") * Time.deltaTime);
 
                         }
 
-                        if (Input.GetAxis("LeftX") > 0.1 || Input.GetAxis("LeftX") < -0.1)
+                        if (Input.GetAxis("LeftX") > 0.1f || Input.GetAxis("LeftX") < -0.1f)
                         {
                             g_goBoat[g_iJoystickNumber].transform.Rotate(Vector3.up * 50 * Input.GetAxis("LeftX") * Time.deltaTime);
-                            print("boat pos altered");
+                        }
+
+                        if (Input.GetButtonDown("AButton1") == true)
+                        {
+                            if (g_bCanShoot)
+                            {
+                                g_asCannonshot.Play();
+                                Instantiate(g_goCannonBall[g_iJoystickNumber], g_goCannon[g_iJoystickNumber].transform.position, g_goCannon[g_iJoystickNumber].transform.rotation);
+                                g_bCanShoot = false;
+                                Invoke("shootTimer", 3);
+                            }
                         }
 
                         break;
@@ -112,23 +117,19 @@ public class playerController : MonoBehaviour
                         if (Input.GetAxis("LeftY2") < 0.1 && Input.GetAxis("LeftY2") != 0)  // ONLY POSITIVE MOVEMENT THUS THE BOAT CANNOT BE MANIPULATED BACKWARDS
                         {
                             transform.Translate(Vector3.back * 15 * Input.GetAxis("LeftY2") * Time.deltaTime);
-                            print("moving ship2");
                         }
 
 
                         if (Input.GetAxis("L22") > 0)
                         {
-                            //moveShip(g_iJoystickNumber);
-                            print("firing cannon2");
-                            fireCannon();
+                            //fireCannon();
                         }
 
                         if (Input.GetAxis("RightX2") > 0.1 || Input.GetAxis("RightX2") < -0.1) // CAMERA PIVOT
                         {
-                            // moveShip(g_iJoystickNumber);
                             g_tPivotPoint[g_iJoystickNumber].position = g_goBoat[g_iJoystickNumber].transform.position;
                             g_tPivotPoint[g_iJoystickNumber].transform.Rotate(Vector3.up * 50 * Input.GetAxis("RightX2") * Time.deltaTime);
-                            print("cam pivot point altered2");
+
                             g_goCannon[g_iJoystickNumber].transform.Rotate(Vector3.up * 50 * Input.GetAxis("RightX2") * Time.deltaTime);
 
                         }
@@ -136,25 +137,23 @@ public class playerController : MonoBehaviour
                         if (Input.GetAxis("LeftX2") > 0.1 || Input.GetAxis("LeftX2") < -0.1)
                         {
                             g_goBoat[g_iJoystickNumber].transform.Rotate(Vector3.up * 50 * Input.GetAxis("LeftX2") * Time.deltaTime);
-                            print("boat pos altered2");
+                        }
+
+                        //if (Input.GetAxis("R22") > 0.0f)
+                        if (Input.GetButtonDown("AButton2") == true)
+                        {
+                            if (g_bCanShoot)
+                            {
+                                g_asCannonshot.Play();
+                                Instantiate(g_goCannonBall[g_iJoystickNumber], g_goCannon[g_iJoystickNumber].transform.position, g_goCannon[g_iJoystickNumber].transform.rotation);
+                                g_bCanShoot = false;
+                                Invoke("shootTimer", 3);
+                            }
                         }
 
                         break;
                       }
-              }
-          
-          //  this.transform.Translate(0, 0, g_fSpeed * Time.deltaTime);
+            }
         }
-        else
-        {
-            print("fuckity fuck fuck");
-        }
-
-
-
-        //transform.Rotate(Vector3.down * -g_fRotationspeed * Input.GetAxis("LeftX") * Time.deltaTime);
-
-
-        //transform.Translate(0,0,g_fSpeed * Time.deltaTime);
     }
 }
