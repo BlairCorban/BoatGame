@@ -28,4 +28,14 @@ public class cannonballcontroller : MonoBehaviour {
             SceneManager.LoadScene("BWin");
         }
     }
+    void player1wins()
+    {
+        Debug.Log("AWin");
+        SceneManager.LoadScene("AWin");
+    }
+    void player2wins()
+    {
+        Debug.Log("BWin");
+        SceneManager.LoadScene("BWin");
+    }
 }

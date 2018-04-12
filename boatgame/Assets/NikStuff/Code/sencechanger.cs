@@ -15,7 +15,7 @@ public class sencechanger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log("load main");
-        if (Input.GetButtonDown("AButton") == true)
+        if (Input.GetButtonDown("AButton1") == true)
         {
             //Debug.Log("a");
             NewSence();
